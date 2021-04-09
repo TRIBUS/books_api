@@ -25,6 +25,13 @@ class BooksController < ApplicationController
     head :ok
   end
 
+  def export
+    exporter = Books::ExportToCsv.new
+
+    send_data exporter.csv, disposition: :attachment,
+      filename: 'books_export.csv'
+  end
+
   private
 
   def book
